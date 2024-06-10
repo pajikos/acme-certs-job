@@ -38,12 +38,11 @@ jobs:
         run: |
           TAG_VERSION="${{ env.VERSION }}-${{ env.TIMESTAMP }}-${{ env.SHORT_HASH }}"
           IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/acme-certs-job:${TAG_VERSION}"
+          LATEST_IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/acme-certs-job:latest"
           docker buildx build --platform linux/amd64,linux/arm64 \
             --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}" \
-            --label "org.opencontainers.image.description=ACME certificate generator" \
+            --label "org.opencontainers.image.description=Your container image description" \
             --label "org.opencontainers.image.licenses=MIT" \
-            --annotation "org.opencontainers.image.source=https://github.com/${{ github.repository }}" \
-            --annotation "org.opencontainers.image.description=ACME certificate generator" \
-            --annotation "org.opencontainers.image.licenses=MIT" \
             --tag $IMAGE_NAME \
+            --tag $LATEST_IMAGE_NAME \
             --push .
