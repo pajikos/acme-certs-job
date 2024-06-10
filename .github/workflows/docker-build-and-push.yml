@@ -42,5 +42,8 @@ jobs:
             --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}" \
             --label "org.opencontainers.image.description=ACME certificate generator" \
             --label "org.opencontainers.image.licenses=MIT" \
+            --annotation "org.opencontainers.image.source=https://github.com/${{ github.repository }}" \
+            --annotation "org.opencontainers.image.description=ACME certificate generator" \
+            --annotation "org.opencontainers.image.licenses=MIT" \
             --tag $IMAGE_NAME \
             --push .
