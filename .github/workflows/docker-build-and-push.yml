@@ -32,12 +32,12 @@ jobs:
 
       - name: Get short hash
         id: short-hash
-        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "SHORT_HASH=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         run: |
           TAG_VERSION="${{ env.VERSION }}-${{ env.TIMESTAMP }}-${{ env.SHORT_HASH }}"
-          IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${TAG_VERSION}"
+          IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/acme-certs-job:${TAG_VERSION}"
           docker buildx build --platform linux/amd64,linux/arm64 \
             --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}" \
             --tag $IMAGE_NAME \
