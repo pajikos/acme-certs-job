@@ -1,0 +1,14 @@
+
+configMapGenerator:
+- files:
+  - domains.config=domains.config
+  name: domains-config
+  behavior: merge
+- behavior: merge
+  envs:
+  - environment-properties.env
+  name: environment-variables
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base

@@ -1,0 +1,15 @@
+resources:
+  - pvc.yaml
+  - cronjob.yaml
+  - serviceaccount.yaml
+  - role.yaml
+  - rolebinding.yaml
+
+configMapGenerator:
+  - name: domains-config
+    files:
+      - domains.config=domains.config
+  - name: environment-variables
+    envs:
+      - environment-properties.env
+    behavior: create
