@@ -3,14 +3,12 @@ kind: CronJob
 metadata:
   name: acme-certs-job
 spec:
-  schedule: "*/2 * * * *"  # This cron expression runs the job once a day at midnight
+  schedule: "0 0 * * *"  # This cron expression runs the job once a day at midnight
   jobTemplate:
     spec:
       template:
         spec:
           serviceAccountName: acme-certs-sa
-          nodeSelector:    # Add this section
-            location: contabo
           containers:
           - name: acme-certs-job
             image: ghcr.io/pajikos/acme-certs-job:latest
