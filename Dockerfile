@@ -1,5 +1,5 @@
 # Start from the go-acme/lego image
-FROM goacme/lego:v4.19
+FROM goacme/lego:v4.22
 
 # Install required tools
 RUN apk add --no-cache bash wget openssl kubectl
