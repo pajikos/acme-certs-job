@@ -11,6 +11,7 @@ spec:
           serviceAccountName: acme-certs-sa
           containers:
           - name: acme-certs-job
+            imagePullPolicy: Always
             image: ghcr.io/pajikos/acme-certs-job:latest
             envFrom:
             - configMapRef:
