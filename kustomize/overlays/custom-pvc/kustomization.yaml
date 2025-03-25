@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+namespace: default
+
+# Remove PVC from the resources
+patches:
+- patch: |-
+    $patch: delete
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: lego-files-pvc
+  target:
+    kind: PersistentVolumeClaim
+    name: lego-files-pvc
+
+- path: cronjob-patch.yaml
+  target:
+    kind: CronJob
+    name: acme-certs-job
+
+configMapGenerator:
+- name: domains-config
+  files:
+  - domains.config=domains.config
+  behavior: merge
+- name: environment-variables
+  envs:
+  - environment-properties.env
+  behavior: merge
